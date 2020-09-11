@@ -7,30 +7,36 @@ export const POST_ERROR = 'POST_ERROR'
 
 export const getSmurfsAction = () => {
     return function(dispatch){
-        async function axiosGetter(){
-            let res = await axios.get(`http://localhost:3333/smurfs`)
-            return res;
-        }
-        try {
-            let dataForState = axiosGetter();
-            dispatch({
-                type: FETCH_SUCCESS,
-                payload: dataForState
+        axios.get(`http://localhost:3333/smurfs`)
+            .then(res => {
+                dispatch({
+                    type: FETCH_SUCCESS,
+                    payload: res.data
+                }) 
+                console.log('api called with response data: ', res.data)
             })
-        }
-        catch (e){
-            dispatch({
-                type: FETCH_ERROR,
-                payload: e
+            .catch(err => {
+                dispatch({
+                    type: FETCH_ERROR,
+                    payload: err
+                })
             })
-        }
     }
 }
 
-export const postSmurfAction = () => {
+export const postSmurfAction = (smurf) => {
     return function(dispatch){
-        dispatch({
-            type: POST_SUCCESS,
-        })
+        axios.post(`http://localhost:3333/smurfs`, smurf)
+            .then(res => {
+                dispatch({
+                    type: POST_SUCCESS,
+                })
+            })
+            .catch (err => {
+                dispatch({
+                    type: POST_ERROR,
+                    payload: err
+                })
+            }) 
     }
 }
