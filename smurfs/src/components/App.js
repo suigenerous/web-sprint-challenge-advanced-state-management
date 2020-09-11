@@ -1,16 +1,43 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import {getSmurfsAction, postSmurfAction} from '../actions';
+import SmurfCard from './SmurfCard'
+import SmurfForm from './SmurfForm'
 import "./App.css";
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
+
+function App(props){
+  // destucture props here
+
+  const {smurfData, fetchError, smurfToAdd, didSmurfPost, postError, getSmurfsAction, postSmurfAction} = props
+
+  // grab smurf data from api here
+  useEffect(() => {
+    getSmurfsAction()
+  },[getSmurfsAction, didSmurfPost])
+
+  // console.log('smurfData', smurfData);
+  // return JSX here
+  return(
+    <div className="App">
+      <h1>SMURFS! W/Redux</h1>
+      <h2>Smurf Form</h2>
+      <SmurfForm onSubmit = {props.postSmurfAction}/>
+      <h2>Smurf Cards</h2>
+      {smurfData.map(smurf => {
+        return <SmurfCard key = {smurf.id} smurf = {smurf}/>
+      })}
+    </div>
+  )
+}
+
+const mapStateToProps = state => {
+  return {
+    smurfData: state.smurfData,
+    fetchError: state.fetchError,
+    smurfToAdd: state.smurfToAdd,
+    didSmurfPost: state.didSmurfPost,
+    postError: state.postError
   }
 }
 
-export default App;
+export default connect(mapStateToProps, {getSmurfsAction, postSmurfAction})(App);
