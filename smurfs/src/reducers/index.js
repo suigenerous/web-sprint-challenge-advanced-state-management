@@ -1,6 +1,9 @@
 const initialState = {
     smurfData: [],
-    errors: ''
+    fetchError: '',
+    smurfToAdd: {},
+    didSmurfPost: false,
+    postError: ''
 }
 
 export const smurfReducer = (state = initialState, action) => {

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {getSmurfsAction, postSmurfAction} from '../actions';
 import "./App.css";
+
 class App extends Component {
   render() {
     return (
@@ -13,4 +16,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    smurfData: state.smurfData,
+    fetchError: state.fetchError,
+    smurfToAdd: state.smurfToAdd,
+    didSmurfPost: state.didSmurfPost,
+    postError: state.postError
+  }
+}
+
+export default connect(mapStateToProps, {getSmurfsAction, postSmurfAction})(App);
