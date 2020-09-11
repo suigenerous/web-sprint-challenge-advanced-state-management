@@ -17,6 +17,12 @@ export const smurfReducer = (state = initialState, action) => {
     switch(action.type){
         case FETCH_SUCCESS:
             return {...state, smurfData: action.payload}
+        case FETCH_ERROR:
+            return {...state, fetchError: action.payload}
+        case POST_SUCCESS:
+            return {...state}
+        case POST_ERROR:
+            return {...state, postError: action.payload}
         default:
             return state;
     }

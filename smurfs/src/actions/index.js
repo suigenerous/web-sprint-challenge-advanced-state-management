@@ -26,6 +26,7 @@ export const getSmurfsAction = () => {
 
 export const postSmurfAction = (smurf) => {
     return function(dispatch){
+        console.log(smurf)
         axios.post(`http://localhost:3333/smurfs`, smurf)
             .then(res => {
                 dispatch({

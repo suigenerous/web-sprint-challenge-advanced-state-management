@@ -15,15 +15,15 @@ function App(props){
     getSmurfsAction()
   },[getSmurfsAction])
 
-  console.log('smurfData', smurfData);
+  // console.log('smurfData', smurfData);
   // return JSX here
   return(
     <div className="App">
       <h1>SMURFS! W/Redux</h1>
       <h2>Smurf Form</h2>
-      <SmurfForm/>
+      <SmurfForm onSubmit = {props.postSmurfAction}/>
       <h2>Smurf Cards</h2>
-      {smurfData.forEach(smurf => {
+      {smurfData.map(smurf => {
         return <SmurfCard key = {smurf.id} smurf = {smurf}/>
       })}
     </div>
