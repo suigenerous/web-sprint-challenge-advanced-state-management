@@ -3,9 +3,9 @@ import React, {useState} from 'react';
 export default function SmurfForm(props){
 
     const initialFormValues = {
-        name: '',
-        age: 0,
-        height: '0cm',
+        name: 'asas',
+        age: 2,
+        height: '5cm'
     }
 
     const [formValues, setFormValues] = useState(initialFormValues)
@@ -32,6 +32,22 @@ export default function SmurfForm(props){
                         type = 'text'
                         value = {formValues.name}
                         onChange = {e => setFormValues({...formValues, name: e.target.value})}
+                    />
+                </label>
+                <label>
+                    Age:
+                    <input
+                        type = 'text'
+                        value = {formValues.age}
+                        onChange = {e => setFormValues({...formValues, age: e.target.value})}
+                    />
+                </label>
+                <label>
+                    Height:
+                    <input
+                        type = 'text'
+                        value = {formValues.height}
+                        onChange = {e => setFormValues({...formValues, height: e.target.value})}
                     />
                 </label>
                 <input type="submit" value="Submit" />

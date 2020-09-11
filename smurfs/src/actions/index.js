@@ -27,13 +27,16 @@ export const getSmurfsAction = () => {
 export const postSmurfAction = (smurf) => {
     return function(dispatch){
         console.log(smurf)
-        axios.post(`http://localhost:3333/smurfs`, smurf)
+        axios.post('http://localhost:3333/smurfs', smurf)
             .then(res => {
+                console.log('post success')
                 dispatch({
                     type: POST_SUCCESS,
+                    payload: true
                 })
             })
             .catch (err => {
+                console.log('post error')
                 dispatch({
                     type: POST_ERROR,
                     payload: err

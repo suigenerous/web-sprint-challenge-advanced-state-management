@@ -13,7 +13,7 @@ function App(props){
   // grab smurf data from api here
   useEffect(() => {
     getSmurfsAction()
-  },[getSmurfsAction])
+  },[getSmurfsAction, didSmurfPost])
 
   // console.log('smurfData', smurfData);
   // return JSX here
